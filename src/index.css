@@ -1,0 +1,67 @@
+
+@font-face {
+  font-family: 'Jost';
+  src: url('./assets/fonts/Jost-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Jost';
+  src: url('./assets/fonts/Jost-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./assets/fonts/Quicksand-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./assets/fonts/Quicksand-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Schoolbell';
+  src: url('./assets/fonts/Schoolbell-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+@import "tailwindcss";
+
+
+@theme {
+  --font-jost: 'Jost';
+  --font-quicksand: 'Quicksand';
+  --font-Schoolbell: 'Schoolbell';
+  --font-family-sans: 'Jost';
+}
+@layer base {
+  body {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-weight: 400;
+    background-color: #f2f2f6;
+    overflow: hidden;
+
+  p {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-weight: 500;
+  }
+
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+    font-weight: 700;
+  }
+  h5{
+      font-family: var(--font-heading), system-ui, sans-serif;
+    font-weight: 400;
+  }
+}
+}
+
