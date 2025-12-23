@@ -65,3 +65,29 @@
 }
 }
 
+.custom-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 36rem) { /* md */
+  .custom-padding {
+    padding-left: 2.5rem; /* Tailwind px-10 */
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 64rem) { /* lg */
+  .custom-padding {
+    padding-left: 5rem; /* Tailwind px-20 */
+    padding-right: 5rem;
+  }
+}
+
+@media (min-width: 80rem) { /* xl */
+  .custom-padding {
+    padding-left: 6rem; /* Tailwind px-24 */
+    padding-right: 6rem;
+  }
+}
+

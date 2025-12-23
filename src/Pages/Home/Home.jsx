@@ -10,10 +10,9 @@ import SpecialProjectSection from './Sections/SpecialProjectSection/SpecialProje
 
 const Home = () => {
     return (
-        <main className='w-full overflow-x-hidden overflow-y-auto h-screen flex justify-center'>
-            <div className='w-full max-w-[1920px] mx-auto'>
-                {/* Main content sections with responsive padding */}
-                <div className='px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24'>
+        <main className='w-full overflow-x-hidden overflow-y-auto h-screen flex justify-center '>
+            <div className='max-w-full  mx-auto lg:mx-0 '>
+                <div className='sm:px-5 md:px-30'>
                     <Navbar />
                     <Hero />
                     <CategorySection />
@@ -24,9 +23,7 @@ const Home = () => {
                 </div>
 
                 <CountDownSection />
-                
-                {/* Blog section with responsive padding */}
-                <div className='px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-32'>
+                <div className='sm:px-5 md:px-30'>
                     <BlogSection />
                 </div>
             </div>
