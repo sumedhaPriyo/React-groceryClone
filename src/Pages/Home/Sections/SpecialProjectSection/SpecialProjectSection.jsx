@@ -26,8 +26,8 @@ const SpecialProjectSection = () => {
             </div>
 
             <ProductCard />
-            <p className='text-[#4d5574] font-jost text-center my-6 sm:my-8 md:my-10 text-sm sm:text-base md:text-lg px-4'>
-                Discover thousands of other quality products.{' '}
+            <p className='text-[#4d5574] font-jost text-center my-6 sm:my-8 md:my-10 text-sm sm:text-base md:text-lg'>
+                Discover thousands of other quality products.{' '}                                                                                                          
                 <span className='font-quicksand text-[#96ae00] text-sm sm:text-base md:text-lg hover:underline cursor-pointer'>
                     Shop All Products
                 </span>

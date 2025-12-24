@@ -1,6 +1,6 @@
 const RightSideRecomm = () => {
     return (
-        <div className='w-full lg:w-1/2 px-4 sm:px-6 lg:px-0'>
+        <div className='w-full lg:w-1/2'>
             <p className='text-[#96ae00] font-Schoolbell text-sm sm:text-base mb-2 sm:mb-3'>
                 ~ The Best For Your ~
             </p>

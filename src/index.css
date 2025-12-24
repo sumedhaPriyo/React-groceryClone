@@ -46,7 +46,8 @@
     font-family: var(--font-body), system-ui, sans-serif;
     font-weight: 400;
     background-color: #f2f2f6;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 
   p {
     font-family: var(--font-body), system-ui, sans-serif;
@@ -91,3 +92,34 @@
   }
 }
 
+/* Mega Menu Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Mobile Menu Slide In Animation */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideIn {
+  animation: slideInLeft 0.3s ease-out;
+}

@@ -52,7 +52,7 @@ const ProductCard = () => {
             >
                 <Slider {...settings}>
                     {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-                        <div key={item} className='px-3 sm:px-3 mb-5'>
+                        <div key={item} className='sm:px-3 mb-5'>
                             <div className='bg-white shadow-lg hover:shadow-2xl rounded-2xl min-h-[420px] sm:min-h-[400px] md:min-h-[420px] p-6 sm:p-5 group transition-all duration-500 hover:scale-105 hover:-translate-y-2 border border-gray-100'>
                                 {/* Discount Badge */}
                                 <div className='absolute top-6 right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md z-10'>
@@ -60,7 +60,7 @@ const ProductCard = () => {
                                 </div>
 
                            
-                                <div className='relative flex justify-center mb-4 bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 group-hover:bg-gradient-to-br group-hover:from-orange-50 group-hover:to-yellow-50 transition-all duration-500'>
+                                <div className='relative flex justify-center mb-4 bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 group-hover:bg-gradient-to-br group-hover:from-orange-50 group-hover:to-yellow-50 transition-all duration-500 overflow-hidden'>
                                     <img
                                         src={Fruits}
                                         className='w-48 h-48 sm:w-40 sm:h-40 md:w-45 md:h-45 transition-all duration-500 group-hover:opacity-0 group-hover:scale-110 object-contain'
