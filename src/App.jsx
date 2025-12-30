@@ -1,9 +1,10 @@
-import Home from './Pages/Home/Home';
+import RouterContainer from './Router/RouterContainer';
 
 function App() {
     return (
         <>
-            <Home />
+     <RouterContainer />
+
         </>
     );
 }

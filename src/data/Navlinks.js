@@ -2,12 +2,12 @@ const navLinks = [
   {
     id: 1,
     label: 'Home',
-    href: '#home',
+    href: '/',
   },
   {
     id: 2,
     label: 'Shop',
-    href: '#shop',
+    href: '/shop',
     megaMenu: {
       categories: [
         {
@@ -32,7 +32,7 @@ const navLinks = [
   {
     id: 3,
     label: 'Products',
-    href: '#products',
+    href: '/product',
     megaMenu: {
       categories: [
         {
@@ -54,7 +54,7 @@ const navLinks = [
   {
     id: 4,
     label: 'Blog',
-    href: '#blog',
+    href: '/blog',
     megaMenu: {
       categories: [
         {
@@ -83,12 +83,12 @@ const navLinks = [
   {
     id: 5,
     label: 'About us',
-    href: '#about',
+    href: '/about',
   },
   {
     id: 6,
     label: 'Contact us',
-    href: '#contact',
+    href: '/contact',
   },
 ];
 

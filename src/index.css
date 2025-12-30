@@ -123,3 +123,8 @@
 .animate-slideIn {
   animation: slideInLeft 0.3s ease-out;
 }
+
+#right::-webkit-scrollbar{
+  display: none;
+;
+}
