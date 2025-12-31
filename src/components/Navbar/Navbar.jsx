@@ -214,7 +214,7 @@ const Navbar = () => {
 
                             {/* MOBILE LINKS + MEGA */}
                             <ul className='space-y-2'>
-                                {navLinks.map((link) => (
+                                {navLinks.map((link, index) => (
                                     <li key={link.id}>
                                         {link.megaMenu ? (
                                             <>
