@@ -17,20 +17,30 @@ export const ENDPOINTS = {
         WITH_PARAMS: (params) => {
             let url = "/products";
             const queryParams = [];
-            
+
             if (params.limit) queryParams.push(`limit=${params.limit}`);
             if (params.skip) queryParams.push(`skip=${params.skip}`);
             if (params.select) queryParams.push(`select=${params.select}`);
             if (params.category) queryParams.push(`category=${params.category}`);
             if (params.q) queryParams.push(`q=${params.q}`);
-            
+
             if (queryParams.length > 0) {
                 url += `?${queryParams.join("&")}`;
             }
-            
+
             return url;
         },
 
         UPDATE: (id) => `/products/${id}`,
+    },
+
+    CARTS: {
+        ALL: (params = {}) => 'users/6/carts',
+
+        ADD_TO_CART: () => '/carts/add',
+
+        UPDATE: (id) => `/carts/${id}`,
+        REMOVE: (id) => `/carts/${id}`,
+
     },
 };

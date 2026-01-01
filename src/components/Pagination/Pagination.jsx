@@ -8,7 +8,7 @@ const Pagination = ({
     totalPages,
     currentPage,
 }) => {
-    console.log(totalPages, 'totalPages', currentPage, 'currentPage');
+
 
     return (
         <div className='w-full h-30 mt-7 flex flex-wrap items-center justify-center gap-2 sm:gap-4'>
@@ -20,11 +20,11 @@ const Pagination = ({
                         ? 'bg-blue-500 text-white hover:bg-blue-600 cursor-pointer'
                         : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 }`}
-            >
+            >   
                 Prev
             </button>
 
-            <h3>Page No  {`${currentPage} / ${totalPages}`}</h3>
+            <h3>Page No {`${currentPage} / ${totalPages}`}</h3>
             <button
                 onClick={onNext}
                 disabled={!hasNext}

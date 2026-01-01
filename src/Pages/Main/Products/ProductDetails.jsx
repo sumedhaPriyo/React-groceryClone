@@ -14,10 +14,16 @@ import {
 } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productService } from '../../../ApiServices/ProductService';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment } from '../../../redux/Slices/CounterSlice';
+import { addToCart, updateQuantity } from '../../../redux/Slices/CartSlice';
+import { CgLayoutGrid } from 'react-icons/cg';
 
 const ProductDetails = () => {
     const { ProductId } = useParams();
-    console.log(ProductId);
+    const dispatch = useDispatch();
+    const counData = useSelector((state) => state.counter.count);
+    console.log(counData, 'count');
 
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
@@ -26,6 +32,11 @@ const ProductDetails = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const cartItems = useSelector((state) => state.cart?.cart || []);
+    const cartItem = cartItems.find(item => item.id === parseInt(ProductId));
+    const isInCart = !!cartItem;
+    const cartQuantity = cartItem?.quantity || 0;
 
     const fetchproductDetails = async () => {
         try {
@@ -43,7 +54,16 @@ const ProductDetails = () => {
     useEffect(() => {
         fetchproductDetails();
     }, []);
-    console.log(data, 'Data');
+    // console.log(data, 'Data');
+
+    const handleAddTocart=(product)=>{
+        console.log("Adding to cart:", product);
+        if (isInCart) {
+            dispatch(updateQuantity({ id: product.id, quantity: cartQuantity + quantity }));
+        } else {
+            dispatch(addToCart({ ...product, quantity }));
+        }
+    }
 
     const renderStars = (rating) => {
         const stars = [];
@@ -198,20 +218,19 @@ const ProductDetails = () => {
                                     <div className='flex datas-center border-2 border-gray-300 rounded-lg overflow-hidden'>
                                         <button
                                             onClick={() =>
-                                                setQuantity(
-                                                    Math.max(quantity - 1, 1)
-                                                )
+                                                dispatch(decrement())
+
                                             }
                                             className='px-4 py-2 bg-gray-100 hover:bg-gray-200 transition-colors'
                                         >
                                             -
                                         </button>
                                         <span className='px-6 py-2 font-semibold'>
-                                            {quantity}
+                                            {counData}
                                         </span>
                                         <button
                                             onClick={() =>
-                                                setQuantity(quantity + 1)
+                                     dispatch(increment())
                                             }
                                             className='px-4 py-2 bg-gray-100 hover:bg-gray-200 transition-colors'
                                         >
@@ -222,15 +241,22 @@ const ProductDetails = () => {
                             </div>
 
                             <div className='flex flex-col sm:flex-row gap-4'>
-                                <button
-                                    onClick={() =>
-                                        handleAddTocart({ ...data, quantity })
-                                    }
-                                    className='flex items-center justify-center gap-2 bg-linear-to-r from-[#2d2a6e] to-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:from-[#3d3a8e] hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg'
-                                >
-                                    <FaShoppingCart />
-                                    Add to Cart
-                                </button>
+                                {isInCart ? (
+                                    <div className='flex items-center gap-2 bg-green-100 text-green-700 font-semibold py-2 px-6 rounded-lg shadow-lg flex-1 justify-center'>
+                                        <FaShoppingCart />
+                                        {cartQuantity} in Cart
+                                    </div>
+                                ) : (
+                                    <button
+                                        onClick={() =>
+                                            handleAddTocart(data)
+                                        }
+                                        className='flex items-center justify-center gap-2 bg-linear-to-r from-[#2d2a6e] to-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:from-[#3d3a8e] hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg'
+                                    >
+                                        <FaShoppingCart />
+                                        Add to Cart
+                                    </button>
+                                )}
                                 <button className='flex items-center justify-center gap-2 border-2 border-[#2d2a6e] text-[#2d2a6e] font-semibold py-2 px-6 rounded-lg hover:bg-[#2d2a6e] hover:text-white transition-all duration-300'>
                                     <FaShareAlt />
                                     Share

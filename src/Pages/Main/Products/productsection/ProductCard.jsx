@@ -1,11 +1,17 @@
 import React from 'react';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { updateQuantity } from '../../../../redux/Slices/CartSlice';
 
 const ProductCard = ({ item, handleAddTocart, handleProductView }) => {
 
+const dispatch = useDispatch()
+const cartItems = useSelector((state) => state.cart?.cart || []);
 
-
+const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
+const isInCart = !!cartItem;
+const quantity = cartItem?.quantity || 0;
 
     const renderStars = (rating) => {
         const stars = [];
@@ -22,7 +28,7 @@ const ProductCard = ({ item, handleAddTocart, handleProductView }) => {
     };
 
     return (
-        <div className='group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden w-full max-w-sm cursor-pointer mx-auto'>
+        <div className='group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden w-full max-w-md cursor-pointer mx-auto'>
             <div className='relative w-full h-64 overflow-hidden rounded-t-2xl pt-2 '>
                 <img
                     src={item?.images[0]}
@@ -50,16 +56,25 @@ const ProductCard = ({ item, handleAddTocart, handleProductView }) => {
                 <p className='text-gray-600 text-sm line-clamp-2 '>
                     {item?.description}
                 </p>
-                <div className='flex justify-between mt-3'>
-                    <button
-                        onClick={() => handleAddTocart(item)}
-                        className='bg-linear-to-r from-[#2d2a6e] to-blue-200 text-white font-semibold py-2 rounded-lg hover:scale-105 transform transition duration-300 p-3 border border-orange-200'
-                    >
-                        Add to Cart
-                    </button>
+                <div className='flex flex-col sm:flex-row gap-2 mt-3'>
+                    {isInCart ? (
+                        <button
+                            disabled
+                            className='bg-green-100 text-green-700 font-semibold py-2 px-4 rounded-lg cursor-not-allowed border border-green-300 text-sm sm:text-base'
+                        >
+                            Added to Cart
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => handleAddTocart(item)}
+                            className='bg-linear-to-r from-[#2d2a6e] to-blue-200 text-white font-semibold py-2 px-4 rounded-lg hover:scale-105 transform transition duration-300 border border-orange-200 text-sm sm:text-base'
+                        >
+                            Add to Cart
+                        </button>
+                    )}
                     <button
                         onClick={() => handleProductView(item)}
-                        className='bg-linear-to-r from-[#2d2a6e] to-blue-200 text-white font-semibold py-2 rounded-lg hover:scale-105 transform transition duration-300 p-3 border border-orange-200'
+                        className='bg-linear-to-r from-[#2d2a6e] to-blue-200 text-white font-semibold py-2 px-4 rounded-lg hover:scale-105 transform transition duration-300 border border-orange-200 text-sm sm:text-base'
                     >
                         View Details
                     </button>

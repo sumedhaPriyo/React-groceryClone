@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import { IoBagOutline } from 'react-icons/io5';
@@ -7,6 +7,7 @@ import { CiUser, CiHeart, CiSearch } from 'react-icons/ci';
 import { IoMdSearch } from 'react-icons/io';
 import navLinks from '../../data/Navlinks';
 import Logo from '../../assets/images/logo.png';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
@@ -15,6 +16,10 @@ const Navbar = () => {
     const [activeLink, setActiveLink] = useState(1);
 
     const closeTimeout = useRef(null);
+    const navigate = useNavigate()
+
+    const cartitem = useSelector((state) => state.cart?.cart)
+//  console.log(cartitem?.length,"Navbar")
 
     /* ===== DESKTOP HOVER HANDLERS ===== */
     const handleMouseEnter = (id) => {
@@ -32,6 +37,11 @@ const Navbar = () => {
     useEffect(() => {
         if (!open) setMobileMegaOpen(null);
     }, [open]);
+
+
+    const handlenavigate = (data) => {
+        navigate(data)
+    }
 
     return (
         <header className='h-16 md:h-20 border-b border-[#e6eaf0] bg-white sticky top-0 z-[999]'>
@@ -58,21 +68,19 @@ const Navbar = () => {
                                             setMegaMenuOpen(null);
                                         }}
                                         className={`flex items-center gap-1 font-semibold text-sm py-2
-                                            ${
-                                                activeLink === link.id
-                                                    ? 'text-orange-500'
-                                                    : 'text-zinc-700 hover:text-orange-500'
+                                            ${activeLink === link.id
+                                                ? 'text-orange-500'
+                                                : 'text-zinc-700 hover:text-orange-500'
                                             }
                                         `}
                                     >
                                         {link.label}
                                         {link.megaMenu && (
                                             <FaChevronDown
-                                                className={`text-xs transition-transform ${
-                                                    megaMenuOpen === link.id
-                                                        ? 'rotate-180'
-                                                        : ''
-                                                }`}
+                                                className={`text-xs transition-transform ${megaMenuOpen === link.id
+                                                    ? 'rotate-180'
+                                                    : ''
+                                                    }`}
                                             />
                                         )}
                                     </Link>
@@ -169,8 +177,15 @@ const Navbar = () => {
                         <button className='hidden lg:flex w-10 h-10 rounded-full bg-[#ecfbff] items-center justify-center relative'>
                             <CiHeart className='text-xl' />
                         </button>
-                        <button className='hidden lg:flex w-10 h-10 rounded-full bg-[#feefd0] items-center justify-center relative'>
+                        <button
+                            onClick={() => handlenavigate('/cart')}
+                            className='hidden lg:flex w-10 h-10 rounded-full bg-[#feefd0] items-center justify-center relative'>
                             <IoBagOutline className='text-xl' />
+                            {cartitem?.length > 0 && (
+                                <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center'>
+                                    {cartitem.length}
+                                </span>
+                            )}
                         </button>
 
                         {/* MOBILE TOGGLE */}
@@ -195,9 +210,24 @@ const Navbar = () => {
                     <div className='fixed top-0 left-0 h-full w-[80%] max-w-sm bg-white shadow-2xl z-[999] lg:hidden overflow-y-auto'>
                         <div className='flex justify-between items-center p-4 border-b'>
                             <img src={Logo} alt='Logo' className='h-8' />
-                            <button onClick={() => setOpen(false)}>
-                                <RiCloseLine className='text-2xl' />
-                            </button>
+                            <div className='flex items-center gap-3'>
+                                <button
+                                    onClick={() => {
+                                        handlenavigate('/cart');
+                                        setOpen(false);
+                                    }}
+                                    className='w-10 h-10 rounded-full bg-[#feefd0] items-center justify-center relative flex'>
+                                    <IoBagOutline className='text-xl' />
+                                    {cartitem?.length > 0 && (
+                                        <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center'>
+                                            {cartitem.length}
+                                        </span>
+                                    )}
+                                </button>
+                                <button onClick={() => setOpen(false)}>
+                                    <RiCloseLine className='text-2xl' />
+                                </button>
+                            </div>
                         </div>
 
                         <div className='p-4 space-y-6'>
@@ -231,12 +261,11 @@ const Navbar = () => {
                                                 >
                                                     {link.label}
                                                     <FaChevronDown
-                                                        className={`text-xs transition-transform ${
-                                                            mobileMegaOpen ===
+                                                        className={`text-xs transition-transform ${mobileMegaOpen ===
                                                             link.id
-                                                                ? 'rotate-180'
-                                                                : ''
-                                                        }`}
+                                                            ? 'rotate-180'
+                                                            : ''
+                                                            }`}
                                                     />
                                                 </button>
 
